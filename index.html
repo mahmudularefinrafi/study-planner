@@ -2,178 +2,68 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Study Planner App</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      font-family: "Segoe UI", sans-serif;
-      background: #f2f5f9;
-    }
-
-    /* LOGIN SCREEN */
-    .login-section, .dashboard-section {
-      display: none;
-    }
-    .login-section.active, .dashboard-section.active {
-      display: block;
-    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", sans-serif; background: #f2f5f9; }
+    .login-section, .dashboard-section { display: none; }
+    .login-section.active, .dashboard-section.active { display: block; }
     .login-section {
-      height: 100vh;
-      background: linear-gradient(to right, #2196f3, #03a9f4);
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      height: 100vh; background: linear-gradient(to right, #2196f3, #03a9f4);
+      display: flex; justify-content: center; align-items: center;
     }
-
     .login-box {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 350px;
-      text-align: center;
+      background: white; padding: 30px; border-radius: 10px;
+      width: 90%; max-width: 350px; text-align: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
-
-    .login-box img {
-      width: 80px;
-      margin-bottom: 15px;
+    .login-box img { width: 80px; margin-bottom: 15px; }
+    .login-box input, .login-box button {
+      width: 100%; margin-bottom: 10px; padding: 10px;
+      border-radius: 6px; border: 1px solid #ccc;
     }
-
-    .login-box input {
-      display: block;
-      width: 100%;
-      margin-bottom: 10px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-
     .login-box button {
-      width: 100%;
-      padding: 10px;
-      background: #2196f3;
-      border: none;
-      color: white;
-      font-weight: bold;
-      border-radius: 6px;
-      cursor: pointer;
+      background: #2196f3; color: white; font-weight: bold; border: none;
     }
-
-    /* DASHBOARD */
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 20px;
-    }
-
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-
-    .main-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
+    .container { max-width: 1000px; margin: auto; padding: 20px; }
+    h1 { text-align: center; color: #333; }
+    .main-grid { display: flex; flex-wrap: wrap; gap: 20px; }
     .left-panel, .right-panel {
-      flex: 1;
-      min-width: 300px;
-      background: #fff;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      flex: 1; min-width: 300px; background: #fff; padding: 15px;
+      border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px; border-bottom: 1px solid #ddd; }
+    form { display: flex; gap: 5px; margin-bottom: 10px; }
+    input[type="text"], input[type="time"] {
+      padding: 8px; border-radius: 5px; border: 1px solid #ccc;
     }
-
-    th, td {
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-    }
-
-    form {
-      display: flex;
-      margin-bottom: 10px;
-      gap: 5px;
-    }
-
-    input[type="text"] {
-      flex: 1;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
     button.add-btn {
-      padding: 10px;
-      background: #2196f3;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+      padding: 8px 15px; background: #2196f3; color: white;
+      border: none; border-radius: 5px; cursor: pointer;
     }
-
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-
+    ul { list-style: none; padding: 0; }
     li {
-      background: #e0f7fa;
-      padding: 8px;
-      margin-bottom: 8px;
-      border-radius: 5px;
-      display: flex;
-      justify-content: space-between;
+      background: #e0f7fa; padding: 8px; margin-bottom: 8px;
+      border-radius: 5px; display: flex; justify-content: space-between;
     }
-
-    .pomodoro {
-      margin-top: 20px;
-    }
-
+    .pomodoro { margin-top: 20px; }
     #start-timer {
-      margin-top: 10px;
-      background: #4caf50;
-      color: white;
-      padding: 8px 15px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
+      margin-top: 10px; background: #4caf50; color: white;
+      padding: 8px 15px; border: none; border-radius: 6px; cursor: pointer;
     }
-
-    #timer {
-      font-size: 24px;
-      margin: 10px 0;
-    }
-
+    #timer { font-size: 24px; margin: 10px 0; }
     footer {
-      text-align: center;
-      margin-top: 40px;
-      padding: 15px 0;
-      font-size: 14px;
-      color: #555;
+      text-align: center; margin-top: 40px; padding: 15px 0;
+      font-size: 14px; color: #555;
     }
-
     @media screen and (max-width: 768px) {
-      .main-grid {
-        flex-direction: column;
-      }
+      .main-grid { flex-direction: column; }
     }
   </style>
 </head>
 <body>
-
-  <!-- Login Section -->
   <section class="login-section active" id="login-section">
     <div class="login-box">
       <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User" />
@@ -184,22 +74,23 @@
     </div>
   </section>
 
-  <!-- Dashboard Section -->
   <section class="dashboard-section" id="dashboard-section">
     <div class="container">
       <h1>📚 Study Planner Dashboard</h1>
       <div class="main-grid">
         <div class="left-panel">
-          <h3>📖 Today's Reading Plan</h3>
-          <table>
+          <h3>➕ Add Your Study Plan</h3>
+          <form id="plan-form">
+            <input type="text" id="subject" placeholder="Subject" required />
+            <input type="time" id="start-time" required />
+            <input type="time" id="end-time" required />
+            <button type="submit" class="add-btn">Add</button>
+          </form>
+          <table id="plan-table">
             <thead>
-              <tr><th>Subject</th><th>Time</th></tr>
+              <tr><th>Subject</th><th>Time</th><th>Action</th></tr>
             </thead>
-            <tbody>
-              <tr><td>Math</td><td>9:00–10:00 AM</td></tr>
-              <tr><td>English</td><td>10:30–11:30 AM</td></tr>
-              <tr><td>Chemistry</td><td>3:00–4:00 PM</td></tr>
-            </tbody>
+            <tbody></tbody>
           </table>
         </div>
         <div class="right-panel">
@@ -209,7 +100,6 @@
             <button type="submit" class="add-btn">Add</button>
           </form>
           <ul id="task-list"></ul>
-
           <div class="pomodoro">
             <h3>⏰ Pomodoro Timer</h3>
             <p id="timer">25:00</p>
@@ -223,11 +113,9 @@
   <footer>Developed by <strong>Mahmudul Arefin Rafi</strong></footer>
 
   <script>
-    // Login
     function login() {
       const user = document.getElementById("username").value;
       const pass = document.getElementById("password").value;
-
       if (user === "admin" && pass === "1234") {
         document.getElementById("login-section").classList.remove("active");
         document.getElementById("dashboard-section").classList.add("active");
@@ -236,48 +124,56 @@
       }
     }
 
+    // Subject Planner
+    const planForm = document.getElementById("plan-form");
+    const planTable = document.querySelector("#plan-table tbody");
+
+    planForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const subject = document.getElementById("subject").value;
+      const start = document.getElementById("start-time").value;
+      const end = document.getElementById("end-time").value;
+
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${subject}</td><td>${start} - ${end}</td><td><button onclick="this.closest('tr').remove()">🗑️</button></td>`;
+      planTable.appendChild(row);
+
+      planForm.reset();
+    });
+
     // Task List
     const taskForm = document.getElementById("task-form");
     const taskInput = document.getElementById("task-input");
     const taskList = document.getElementById("task-list");
 
-    if (taskForm) {
-      taskForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const task = taskInput.value;
-        addTask(task);
-        taskInput.value = "";
-      });
-    }
-
-    function addTask(task) {
+    taskForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const task = taskInput.value;
       const li = document.createElement("li");
       li.innerHTML = `${task} <button onclick="this.parentElement.remove()">✅</button>`;
       taskList.appendChild(li);
-    }
+      taskInput.value = "";
+    });
 
-    // Pomodoro Timer
+    // Pomodoro
     const timerDisplay = document.getElementById("timer");
     const startBtn = document.getElementById("start-timer");
     let countdown;
 
-    if (startBtn) {
-      startBtn.addEventListener("click", function () {
-        let timeLeft = 25 * 60;
-        clearInterval(countdown);
-        countdown = setInterval(() => {
-          let min = Math.floor(timeLeft / 60);
-          let sec = timeLeft % 60;
-          timerDisplay.textContent = `${String(min).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
-          timeLeft--;
-          if (timeLeft < 0) {
-            clearInterval(countdown);
-            timerDisplay.textContent = "Done!";
-          }
-        }, 1000);
-      });
-    }
+    startBtn.addEventListener("click", function () {
+      let timeLeft = 25 * 60;
+      clearInterval(countdown);
+      countdown = setInterval(() => {
+        let min = Math.floor(timeLeft / 60);
+        let sec = timeLeft % 60;
+        timerDisplay.textContent = `${String(min).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
+        timeLeft--;
+        if (timeLeft < 0) {
+          clearInterval(countdown);
+          timerDisplay.textContent = "Done!";
+        }
+      }, 1000);
+    });
   </script>
-
 </body>
 </html>
