@@ -35,13 +35,14 @@
     }
     table { width: 100%; border-collapse: collapse; }
     th, td { padding: 10px; border-bottom: 1px solid #ddd; }
-    form { display: flex; gap: 5px; margin-bottom: 10px; }
+    form { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
     input[type="text"], input[type="time"] {
       padding: 8px; border-radius: 5px; border: 1px solid #ccc;
+      flex: 1 1 30%;
     }
     button.add-btn {
       padding: 8px 15px; background: #2196f3; color: white;
-      border: none; border-radius: 5px; cursor: pointer;
+      border: none; border-radius: 5px; cursor: pointer; flex: 1 1 100%;
     }
     ul { list-style: none; padding: 0; }
     li {
@@ -79,18 +80,18 @@
       <h1>📚 Study Planner Dashboard</h1>
       <div class="main-grid">
         <div class="left-panel">
-          <h3>➕ Add Your Study Plan</h3>
-          <form id="plan-form">
-            <input type="text" id="subject" placeholder="Subject" required />
+          <h3>📖 Add Subject & Time</h3>
+          <form id="subject-form">
+            <input type="text" id="subject-name" placeholder="Subject" required />
             <input type="time" id="start-time" required />
             <input type="time" id="end-time" required />
             <button type="submit" class="add-btn">Add</button>
           </form>
-          <table id="plan-table">
+          <table>
             <thead>
               <tr><th>Subject</th><th>Time</th><th>Action</th></tr>
             </thead>
-            <tbody></tbody>
+            <tbody id="subject-list"></tbody>
           </table>
         </div>
         <div class="right-panel">
@@ -125,20 +126,18 @@
     }
 
     // Subject Planner
-    const planForm = document.getElementById("plan-form");
-    const planTable = document.querySelector("#plan-table tbody");
+    const subjectForm = document.getElementById("subject-form");
+    const subjectList = document.getElementById("subject-list");
 
-    planForm.addEventListener("submit", function (e) {
+    subjectForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      const subject = document.getElementById("subject").value;
+      const subject = document.getElementById("subject-name").value;
       const start = document.getElementById("start-time").value;
       const end = document.getElementById("end-time").value;
-
       const row = document.createElement("tr");
       row.innerHTML = `<td>${subject}</td><td>${start} - ${end}</td><td><button onclick="this.closest('tr').remove()">🗑️</button></td>`;
-      planTable.appendChild(row);
-
-      planForm.reset();
+      subjectList.appendChild(row);
+      subjectForm.reset();
     });
 
     // Task List
